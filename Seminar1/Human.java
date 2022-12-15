@@ -10,14 +10,25 @@ public class Human {
   private Human father;
   private List<Human> children;
 
-  public Human(String fullName, String gender, Human mother, Human father) {
+  private String appeal;
+
+  public Human(String fullName, String gender) {
     this.fullName = fullName;
     this.gender = gender;
+    this.children = new ArrayList<>();
+
+    if (this.gender.toLowerCase().equals("male"))
+      this.appeal = "His";
+    else
+      this.appeal = "Her";
+  }
+
+  public Human(String fullName, String gender, Human mother, Human father) {
+    this(fullName, gender);
     this.mother = mother;
     this.father = father;
     father.children.add(this);
     mother.children.add(this);
-    this.children = new ArrayList<>();
   }
 
   public String getLastName() {
@@ -25,13 +36,20 @@ public class Human {
   }
 
   public String getInfo() {
-    String info = String.format("Name: %s, gender: %s.\nIt's parents:\nFather: %s\nMother: %s", fullName,
-        gender, father, mother);
+    String info = String.format("Name: %s, gender: %s.\n%s parents:\nFather %s\nMother %s", fullName,
+        gender, appeal, father, mother);
 
     if (children.isEmpty())
-      return info;
+      return info + "\n" + fullName + " has not children";
 
-    return String.format(info + "\nIt's children: %s", children);
+    return String.format(info + "\n%s child(ren): %s", appeal, children);
+  }
+
+  public String getChildren() {
+    if (children.isEmpty())
+      return fullName + " has not children";
+
+    return this.children.toString();
   }
 
   @Override
