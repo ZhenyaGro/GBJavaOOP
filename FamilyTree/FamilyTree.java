@@ -3,7 +3,8 @@ package FamilyTree;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;;
+import java.util.Map;
+import java.util.Scanner;;
 
 public class FamilyTree {
 
@@ -37,6 +38,26 @@ public class FamilyTree {
       }
     }
     return null;
+  }
+
+  public Human searchByName() {
+    Scanner str = new Scanner(System.in);
+    System.out.println("\nВведите имя и фамилию: ");
+    String fullName = str.next() + " " + str.next(); // Можно ли ссчитать два слова без двойного использования метода
+                                                     // 'next()'?
+
+    return this.searchByName(fullName);
+  }
+
+  public void moreInfo(Human person) {
+    if (person != null) {
+      Scanner str = new Scanner(System.in);
+      System.out.println("Получить дополнительную информацию о найденном человеке? (y/n): ");
+      if (str.next().toLowerCase().equals("y"))
+        System.out.println(person.getInfo());
+    } else {
+      System.out.println("Человек не найден");
+    }
   }
 
   public void showHumans() {
