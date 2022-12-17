@@ -19,11 +19,9 @@ public class Program {
     Scanner str = new Scanner(System.in);
 
     System.out.print(
-        "Меню:\n1 - Показать всех людей\n2 - Найти человека по имени и фамилии\n3 - Добавить нового человека\nВыбрано: ");
+        "Меню:\n1 - Показать всех людей\n2 - Найти человека по имени и фамилии\n3 - Добавить нового человека\n4 - Выход\nВыбрано: ");
 
     String selectedItem = str.next();
-
-    String fullName;
     switch (selectedItem) {
       case "1":
         System.out.println("\nЛюди из семейного дерева:");
@@ -36,31 +34,13 @@ public class Program {
         break;
 
       case "3":
-        // System.out.print("\nВведите имя и фамилию: ");
-        // fullName = str.next() + " " + str.next();
-        // System.out.print("Выберите пол (введите букву: М - мужской, Ж - женский): ");
-        // String gender = str.next().toLowerCase();
-        // if (gender.equals("ж"))
-        // gender = "Женский";
-        // else
-        // gender = "Мужской";
-
-        // System.out.println("Введено: Имя " + fullName + " пол " + gender);
-
-        // Map<Integer, Human> availableParents =
-        // familyTree.betterGetterHumans("мужской");
-        // System.out.println(availableParents);
-        // System.out.println("Выберите отца: ");
-        // availableParents.entrySet()
-        // .stream()
-        // .forEach(person -> System.out.println(person.getKey() + " - " +
-        // person.getValue()));
-        // int numOfParent = str.nextInt();
-
-        // familyTree.addHuman(fullName, gender, availableParents.get(numOfParent),
-        // availableParents.get(numOfParent));
-
+        familyTree.addHuman();
+        familyTree.showHumans();
         break;
+
+      case "4":
+        str.close();
+        return;
 
       default:
         System.out.println("Выбран недействительный пункт меню");
@@ -69,7 +49,4 @@ public class Program {
     str.close();
   }
 
-  public void chooseParent() {
-
-  }
 }

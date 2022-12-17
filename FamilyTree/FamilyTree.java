@@ -30,6 +30,40 @@ public class FamilyTree {
     this.humans.add(new Human(fullName, gender, mother, father));
   }
 
+  public void addHuman() {
+    Scanner str = new Scanner(System.in);
+    System.out.print("\nВведите имя и фамилию: ");
+    String fullName = str.next() + " " + str.next();
+    System.out.print("Выберите пол (введите букву: М - мужской, Ж - женский): ");
+    String gender = str.next().toLowerCase();
+    if (gender.equals("ж"))
+      gender = "Женский";
+    else
+      gender = "Мужской";
+    System.out.println("Введено: Имя " + fullName + " пол " + gender);
+
+    Map<Integer, Human> availableMothers = chooseParent("женский");
+    Human parentMother = availableMothers.get(str.nextInt());
+
+    Map<Integer, Human> availableFathers = chooseParent("мужской");
+    Human parentFather = availableFathers.get(str.nextInt());
+
+    this.humans.add(new Human(fullName, gender, parentMother, parentFather));
+
+  }
+
+  private Map<Integer, Human> chooseParent(String gender) {
+    Map<Integer, Human> availableParents = betterGetterHumans(gender);
+    System.out.println(availableParents);
+    System.out.println("Выберите родителя: ");
+    availableParents.entrySet()
+        .stream()
+        .forEach(person -> System.out.println(person.getKey() + " - " +
+            person.getValue()));
+
+    return availableParents;
+  }
+
   public Human searchByName(String fullName) {
     for (Human person : humans) {
       if (person.getFullName().toLowerCase().equals(fullName.toLowerCase())) {
