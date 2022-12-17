@@ -52,18 +52,6 @@ public class FamilyTree {
 
   }
 
-  private Map<Integer, Human> chooseParent(String gender) {
-    Map<Integer, Human> availableParents = betterGetterHumans(gender);
-    System.out.println(availableParents);
-    System.out.println("Выберите родителя: ");
-    availableParents.entrySet()
-        .stream()
-        .forEach(person -> System.out.println(person.getKey() + " - " +
-            person.getValue()));
-
-    return availableParents;
-  }
-
   public Human searchByName(String fullName) {
     for (Human person : humans) {
       if (person.getFullName().toLowerCase().equals(fullName.toLowerCase())) {
@@ -75,7 +63,7 @@ public class FamilyTree {
   }
 
   public Human searchByName() {
-    Scanner str = new Scanner(System.in);
+    Scanner str = new Scanner(System.in); // Если закрыть str в конце метода, то появляется ошибка в работе программы.
     System.out.println("\nВведите имя и фамилию: ");
     String fullName = str.next() + " " + str.next(); // Можно ли ссчитать два слова без двойного использования метода
                                                      // 'next()'?
@@ -99,23 +87,7 @@ public class FamilyTree {
       System.out.println(person);
   }
 
-  public List<Human> getHumans(String gender) {
-    List<Human> foundPeople = new ArrayList<Human>();
-
-    if (gender == null) {
-      for (Human person : humans)
-        foundPeople.add(person);
-    } else {
-      for (Human person : humans) {
-        if (person.getGender().toLowerCase().equals(gender.toLowerCase()))
-          foundPeople.add(person);
-      }
-    }
-
-    return foundPeople;
-  }
-
-  public Map<Integer, Human> betterGetterHumans(String gender) {
+  public Map<Integer, Human> getHumans(String gender) {
     Map<Integer, Human> foundPeople = new HashMap<>();
 
     int count = 0;
@@ -130,6 +102,22 @@ public class FamilyTree {
     }
 
     return foundPeople;
+  }
+
+  public Map<Integer, Human> getHumans() {
+    return getHumans(null);
+  }
+
+  private Map<Integer, Human> chooseParent(String gender) {
+    Map<Integer, Human> availableParents = getHumans(gender);
+    System.out.println(availableParents);
+    System.out.println("Выберите родителя: ");
+    availableParents.entrySet()
+        .stream()
+        .forEach(person -> System.out.println(person.getKey() + " - " +
+            person.getValue()));
+
+    return availableParents;
   }
 
 }
