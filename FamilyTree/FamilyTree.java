@@ -39,7 +39,7 @@ public class FamilyTree {
     if (gender.equals("ж"))
       gender = "Женский";
     else
-      gender = "Мужской";
+      gender = "Мужской"; // Это, конечно, не совсем корректно, но в рамках изучения ООП пока сделано так
     System.out.println("Введено: Имя " + fullName + " пол " + gender);
 
     Map<Integer, Human> availableMothers = chooseParent("женский");
@@ -49,7 +49,6 @@ public class FamilyTree {
     Human parentFather = availableFathers.get(str.nextInt());
 
     this.humans.add(new Human(fullName, gender, parentMother, parentFather));
-
   }
 
   public Human searchByName(String fullName) {
