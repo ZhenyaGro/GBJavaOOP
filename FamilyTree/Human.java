@@ -35,6 +35,10 @@ public class Human {
     return fullName;
   }
 
+  public String getGender() {
+    return gender;
+  }
+
   public String getInfo() {
     String info = String.format("Имя: %s, пол: %s.\n%s родители:\nОтец %s\nМать %s", fullName,
         gender, appeal, father != null ? father : "не найден", mother != null ? mother : "не найдена");

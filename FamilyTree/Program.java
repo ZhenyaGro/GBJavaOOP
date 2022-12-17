@@ -1,5 +1,7 @@
 package FamilyTree;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Program {
@@ -8,7 +10,7 @@ public class Program {
 
     Human ivanIvanov = new Human("Иван Иванов", "Мужской");
     Human mariaIvanova = new Human("Мария Иванова", "Женский");
-    Human petrIvanov = new Human("Петр Иванов", "Мужсой", mariaIvanova, ivanIvanov);
+    Human petrIvanov = new Human("Петр Иванов", "Мужской", mariaIvanova, ivanIvanov);
 
     familyTree.addHuman(ivanIvanov);
     familyTree.addHuman(mariaIvanova);
@@ -50,15 +52,36 @@ public class Program {
           gender = "Женский";
         else
           gender = "Мужской";
-        // familyTree.addHuman(fullName, gender);
+
         System.out.println("Введено: Имя " + fullName + " пол " + gender);
-        familyTree.showHumans();
+
+        // List<Human> availableParents = familyTree.getHumans("женский");
+        // System.out.println("Добавьте мать (выберите цифру):");
+        // int count = 0;
+        // for (Human person : availableParents) {
+        // System.out.println(++count + " - " + person);
+        // }
+
+        Map<Integer, Human> availableParents = familyTree.betterGetterHumans("мужской");
+        System.out.println(availableParents);
+        System.out.println("Выберите отца: ");
+        availableParents.entrySet()
+            .stream()
+            .forEach(person -> System.out.println(person.getKey() + " - " + person.getValue()));
+        int numOfParent = str.nextInt();
+
+        familyTree.addHuman(fullName, gender, availableParents.get(numOfParent), availableParents.get(numOfParent));
+
         break;
 
       default:
         System.out.println("Выбран недействительный пункт меню");
         break;
     }
+    str.close();
+  }
+
+  public void chooseParent() {
 
   }
 }
