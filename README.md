@@ -1,3 +1,3 @@
 # Object-oriented programming GB course.
 
-## Status: in progress...
+## The work continues [here](https://github.com/ZhenyaGro/GBJavaOOPFork/tree/ZhenyaGro)
