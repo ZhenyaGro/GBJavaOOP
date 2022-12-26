@@ -1,4 +1,4 @@
-package src;
+package src.FileProcessing;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -7,8 +7,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class FileWorker<T extends Human> {
+import src.Entities.FamilyTree;
+import src.Entities.Human;
 
+public class FileWorker<T extends Human> implements SaveLoadable {
+
+  @Override
   public void save(Serializable serializable) {
     try {
       ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("familyTree.out"));
@@ -21,6 +25,7 @@ public class FileWorker<T extends Human> {
 
   }
 
+  @Override
   public FamilyTree<T> load(String path) {
     try {
       ObjectInputStream objectInputStream = new ObjectInputStream(
@@ -35,6 +40,7 @@ public class FileWorker<T extends Human> {
     }
   }
 
+  @Override
   public FamilyTree<T> load() {
     return load("familyTree.out");
   }

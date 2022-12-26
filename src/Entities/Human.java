@@ -1,4 +1,4 @@
-package src;
+package src.Entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,7 +10,6 @@ public class Human implements Serializable, Comparable<Human> {
   private Human mother;
   private Human father;
   private List<Human> children;
-
   private String appeal;
 
   public Human(String fullName, String gender) {
@@ -40,6 +39,10 @@ public class Human implements Serializable, Comparable<Human> {
 
   public String getGender() {
     return gender;
+  }
+
+  public int getNumberOfChildren() {
+    return children.size();
   }
 
   public String getInfo() {
