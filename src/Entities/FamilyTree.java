@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import src.FamilyTreeIterator;
+import src.FTIterator;
 
 public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
 
@@ -24,20 +24,16 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
     this.humans.putIfAbsent(id++, human);
   }
 
-  public T searchByName(String fullName) {
+  public Map.Entry<Integer, T> searchByName(String fullName) {
     for (Map.Entry<Integer, T> person : humans.entrySet()) {
-      if (person.getValue().getFullName().toLowerCase().equals(fullName.toLowerCase())) {
-        T human = person.getValue();
-        System.out.println("id: " + person.getKey() + " имя: " + human);
-        return human;
+      if (person.getValue()
+          .getFullName()
+          .toLowerCase()
+          .equals(fullName.toLowerCase())) {
+        return person;
       }
     }
     return null;
-  }
-
-  public void showHumans() {
-    for (Map.Entry<Integer, T> person : humans.entrySet())
-      System.out.println("id: " + person.getKey() + ", " + person.getValue());
   }
 
   public Map<Integer, T> getAllHumans() {
@@ -51,7 +47,10 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
       return getAllHumans();
     } else {
       for (Map.Entry<Integer, T> person : humans.entrySet()) {
-        if (person.getValue().getGender().toLowerCase().equals(gender.toLowerCase()))
+        if (person.getValue()
+            .getGender()
+            .toLowerCase()
+            .equals(gender.toLowerCase()))
           foundPeople.putIfAbsent(person.getKey(), person.getValue());
       }
     }
@@ -75,7 +74,7 @@ public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
 
   @Override
   public Iterator<T> iterator() {
-    return new FamilyTreeIterator<T>(humans);
+    return new FTIterator<T>(humans);
   }
 
 }
