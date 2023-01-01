@@ -1,15 +1,11 @@
 package src.Service;
 
 import java.io.IOException;
-import java.io.Serializable;
-
-import src.Entities.FamilyTree;
-import src.Entities.Human;
 
 public interface SaveLoadable {
-  void save(Serializable serializable) throws IOException;
+  void save() throws IOException;
 
-  FamilyTree<? extends Human> load(String path) throws Exception;
+  void load(String path) throws Exception;
 
-  FamilyTree<? extends Human> load() throws Exception;
+  void load() throws Exception;
 }
