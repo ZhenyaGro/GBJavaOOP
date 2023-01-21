@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import src.Entities.Human;
+import src.Service.Commands.Executable;
 import src.Service.UserCommunication.UserInput;
 import src.Service.UserCommunication.UserMenu;
 
@@ -11,22 +12,22 @@ public class UserCommunication<T extends Human> {
   private UserInput ui = new UserInput();
   private UserMenu<T> um = new UserMenu<T>();
 
-  public void showMenu() {
-    um.showMenu();
+  public String launchMenu(List<Executable> commands) {
+    um.mainMenu(commands);
+    return ui.getString();
   }
 
   public String getString() {
     return ui.getString();
   }
 
+  public int getInt() {
+    return ui.getInt();
+  }
+
   public void showHumansFromTree(Map<Integer, T> humans) {
     um.textBeforeShowHumans();
     um.showHumans(humans);
-  }
-
-  public String askToSort() {
-    um.textAskToSort();
-    return ui.getString();
   }
 
   public void showSortedHumanList(List<T> humanList) {
@@ -62,7 +63,7 @@ public class UserCommunication<T extends Human> {
   }
 
   public void showMoreHumansInfo(Map.Entry<Integer, T> personWithId) {
-    if (personWithId.getValue() != null)
+    if (personWithId != null)
       um.showInfo(personWithId.getValue().getInfo());
     else
       um.humanNotFound();

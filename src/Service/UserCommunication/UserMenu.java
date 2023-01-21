@@ -4,29 +4,19 @@ import java.util.List;
 import java.util.Map;
 
 import src.Entities.Human;
+import src.Service.Commands.Executable;
 
 public class UserMenu<T extends Human> {
 
-  public void showMenu() {
-    System.out.print("\nМеню:\n" +
-        "1 - Показать всех людей\n" +
-        "2 - Найти человека по имени и фамилии\n" +
-        "3 - Добавить нового человека\n" +
-        "4 - Сохранить текущее дерево в файл\n" +
-        "5 - Загрузить дерево из файла\n" +
-        "q - Выход\n" +
-        "Выбрано: ");
+  public void mainMenu(List<Executable> commands) {
+    System.out.println("");
+    for (int i = 0; i < commands.size(); i++)
+      System.out.println(i + " - " + commands.get(i).description());
+    System.out.println("q - Выход");
   }
 
   public void textBeforeShowHumans() {
     System.out.println("\nЛюди из семейного дерева:");
-  }
-
-  public void textAskToSort() {
-    System.out.println("Применить сортировку:\n" +
-        "1 - Сортировка по имени\n" +
-        "2 - Сортировка по количеству детей\n" +
-        "q - Не применять сортировку");
   }
 
   public void textIncorrectInput() {
