@@ -10,12 +10,12 @@ import src.Service.Commands.*;
 public class Controller<T extends Human> {
 
   private boolean controllerOn = true;
-  private FTService<T> fts;
+  private TreeService<T> fts;
   private UserCommunication<T> uc;
   private List<Executable> commandList;
 
   public Controller(FamilyTree<T> familyTree) {
-    this.fts = new FTService<T>(familyTree);
+    this.fts = new TreeService<T>(familyTree);
     this.uc = new UserCommunication<T>();
     commandList = new ArrayList<>();
 
@@ -44,7 +44,7 @@ public class Controller<T extends Human> {
   public void startControl() {
     String userInput = uc.launchMenu(commandList);
 
-    if (userInput.equals("q")) {
+    if (userInput.equals("q") || userInput.equals("й")) {
       this.controllerOn = false;
       uc.closeInput();
     } else {

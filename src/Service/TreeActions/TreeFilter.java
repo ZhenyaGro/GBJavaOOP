@@ -1,4 +1,4 @@
-package src.Service.Tree;
+package src.Service.TreeActions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,12 +6,11 @@ import java.util.Map;
 import src.Entities.FamilyTree;
 import src.Entities.Human;
 
-public class TreeFilter<T extends Human> {
+public class TreeFilter<T extends Human> extends TreeAction<T> {
   private Map<Integer, T> humans;
-  private FamilyTree<T> tree;
 
   public TreeFilter(FamilyTree<T> tree) {
-    this.tree = tree;
+    super(tree);
   }
 
   /**

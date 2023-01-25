@@ -1,30 +1,22 @@
 package src.Service.Commands;
 
 import src.Entities.Human;
-import src.Main.FTService;
+import src.Main.TreeService;
 import src.Main.UserCommunication;
 
-public class CommandLoad<T extends Human> implements Executable {
-  private FTService<T> fts;
-  private UserCommunication<T> uc;
-
-  public CommandLoad(FTService<T> fts, UserCommunication<T> uc) {
-    this.fts = fts;
-    this.uc = uc;
+public class CommandLoad<T extends Human> extends Command<T> {
+  public CommandLoad(TreeService<T> fts, UserCommunication<T> uc) {
+    super(fts, uc);
   }
 
   @Override
   public void execute() {
     fts.createBackup();
     fts.clearTree();
-    try {
-      fts.load();
-      uc.loadAction(true);
-    } catch (Exception e) {
-      e.printStackTrace();
-      uc.loadAction(false);
-      fts.restoreFromBackup();
-    }
+    boolean success = fts.load();
+    uc.loadAction(success);
+    if (!success)
+      fts.restoreBackup();
   }
 
   @Override
